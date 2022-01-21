@@ -1,3 +1,29 @@
+"""
+site clearance
+top soil exctn m2
+disposal m
+trench excavation
+retaining exctd matls m3
+earthwork support
+Surface treatment(
+    -apply herb
+)
+blinding/fdn footing m3
+ground beam(
+    formwork
+    reinforcement
+    concrete
+)
+backfilling
+filling to makeup level
+DPM
+oversite concrete slab(
+    formwork
+    reinforcement
+    conc
+)
+"""
+
 class Substructure:
     def __init__(self,site_breadth, site_length, site_perimeter=None, breadth=None, length=None, perimeter=None):
         self.site_breadth = site_breadth
