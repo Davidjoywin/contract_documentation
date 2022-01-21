@@ -13,8 +13,6 @@ class Concrete:
     def concrete(self):
         return self.girth * self.depth * self.width
 
-        """==========================================================="""
-
 class Substructure:
     def __init__(self, girth, site_breadth, site_length, site_perimeter=None, breadth=None, length=None, perimeter=None):
         self.girth = girth
