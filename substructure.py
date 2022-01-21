@@ -1,29 +1,3 @@
-"""
-site clearance
-top soil exctn m2
-disposal m
-trench excavation
-retaining exctd matls m3
-earthwork support
-Surface treatment(
-    -apply herb
-)
-blinding/fdn footing m3
-ground beam(
-    formwork
-    reinforcement
-    concrete
-)
-backfilling
-filling to makeup level
-DPM
-oversite concrete slab(
-    formwork
-    reinforcement
-    conc
-)
-"""
-
 class Concrete:
     def __init__(self, girth, depth, width):
         self.girth = girth
@@ -110,7 +84,7 @@ class Substructure:
 def float_to_two_places(func):
     def inner(value):
         value = func(value)
-        
+
         return "{:,}".format()
     return inner
     
