@@ -5,7 +5,7 @@ class Concrete:
         self.width = width
 
     def formwork(self):
-        return self.girth * 2
+        return (self.girth * self.depth) * 2
 
     def reinforcement(self):
         pass
@@ -22,10 +22,11 @@ class Substructure:
         self.breadth = breadth if breadth != None else site_breadth
         self.length = length if length != None else site_length
         self.perimeter = perimeter if perimeter != None else site_perimeter
+        self.blind_depth = 0
         self.topsoil_depth = 150
-        self.fdn_depth = 450 # Unsure yet
-        self.fdn_width = 675 # Unsure yet
-        self.concrete = Concrete(girth, self.fdn_depth, self.fdn_width)
+        self.fdn_depth = 1050 # Unsure yet
+        self.fdn_width = 230 * 3 # Unsure yet
+        self.concrete_in_foundation = Concrete(girth, 8, self.fdn_width // 3)
 
     def __str__(self):
         return "Substructure in mm"
@@ -43,45 +44,51 @@ class Substructure:
         return self.site_area()
 
     def topsoil_excavation(self):
+        self.fdn_depth -= self.topsoil_depth #Subtract the top soil from the fdn depth
         return  self.building_area() * self.topsoil_depth
 
     def bulk_excavation(self):
         return self.girth * self.fdn_width * self.fdn_depth
 
     def disposal_excavated_material(self):
-        return self.topsoil_excavation() + self.bulk_excavation()
+        return self.topsoil_excavation()
 
-    def earth_work_support(self, depth, girth):
+    def earth_work_support(self, depth):
         return (self.girth * depth) * 2
 
-    def surface_treatment(self, depth, girth):
+    def surface_treatment(self, depth):
         return (self.girth * depth) * 3
 
-    def blinding(self, girth, blind_height):
-        return format_my_value(self.girth * blind_height)
+    def blinding(self, depth):
+        self.blinding_depth += depth
+        return self.girth * self.fdn_width * self.blind_depth
+
 
     def reinforcement(self):
         pass
 
     def formwork_to_fdn_concrete(self):
-        return self.concrete.formwork()
+        return self.concrete_in_foundation.formwork()
 
     def reinforcement_in_concrete(self):
-        return format_my_value(self.concrete.reinforcement())
+        return self.concrete_in_foundatin.reinforcement()
 
     def concrete_in_fdn(self):
-        return format_my_value(self.concrete.concrete())
+        return self.concrete_in_foundation.concrete()
 
     def filling_to_excavation(self):
         pass
 
-    def filling_to_makeup_level(self):
-        pass
+    def filling_to_makeup_level(self, *compartment_area):
+
+        for area in compartment_area:
+            area *= 450
 
     def compacting(self):
-        return format_my_value(self.girth * ((self.fdn_width/3) * 2) * self.depth)
+        return self.girth * ((self.fdn_width//3) * 2) * self.fdn_depth
 
 def float_to_two_places(func):
+    """Convert the value gotten into two decimal places"""
     def inner(value):
         value = func(value)
 
