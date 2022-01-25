@@ -11,5 +11,8 @@ class test_substructure(unittest.TestCase):
     def test_topsoil_excavation(self):
         self.assertEqual(sub.topsoil_excavation(), sub.site_clearance()*150)
 
+    def test_disposal(self):
+        
+
 if __name__ == "__main__":
     unittest.main()

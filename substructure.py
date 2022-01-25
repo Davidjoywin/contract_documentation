@@ -10,8 +10,18 @@ class Concrete:
     def reinforcement(self):
         pass
 
-    def concrete(self):
+    def concrete(self)->int:
         return self.girth * self.depth * self.width
+
+class Ground_beam(Concrete):
+    def __init__(self, girth, depth, width):
+        super().__init__(girth, depth, width)
+        self.girth = girth
+        self.depth = depth
+        self.width = width
+
+    def gb_formwork(self):
+        return self.formwork()
 
 class Substructure:
     def __init__(self, girth, site_breadth, site_length, site_perimeter=None, breadth=None, length=None, perimeter=None):
@@ -99,5 +109,5 @@ def format_my_value(value):
     """Formating my number values. As in 1,000,000"""
     return "{:,}".format(value)
 
-sub = Substructure(45000.3243, 3400,4300)
-print(sub.concrete_in_fdn())
+grd_beam = Ground_beam(900, 230, 203000);
+print(grd_beam.gb_formwork())
